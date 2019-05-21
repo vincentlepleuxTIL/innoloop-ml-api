@@ -1,3 +1,6 @@
+import ntlk
+nltk.download('punkt')
+
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 import numpy as numpy
