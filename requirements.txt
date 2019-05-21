@@ -21,6 +21,7 @@ Flask==1.0.3
 funcy==1.12
 future==0.17.1
 gensim==3.7.2
+gunicorn==19.9.0
 idna==2.8
 ipykernel==5.1.0
 ipython==7.5.0
