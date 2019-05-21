@@ -58,16 +58,16 @@ print("Impact cleaned")
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 ##Handle full text search model
-vectorizerText = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-                                 strip_accents = 'unicode', # works 
-                                stop_words = 'english', # works
-                                lowercase = True, # works
-                                max_df = 0.05, # works
-                                min_df = 0.001)
-trsfm_Text=vectorizerText.fit_transform(topics_text)
-print(len(vectorizerText.get_feature_names()))
+#vectorizerText = TfidfVectorizer(tokenizer=LemmaTokenizer(),
+#                                 strip_accents = 'unicode', # works 
+#                                stop_words = 'english', # works
+#                                lowercase = True, # works
+#                               max_df = 0.05, # works
+#                                min_df = 0.001)
+#trsfm_Text=vectorizerText.fit_transform(topics_text)
+#print(len(vectorizerText.get_feature_names()))
 
-print("Full text model created")
+#print("Full text model created")
 
 ##Handle challenge part search model
 vectorizerChallenge = TfidfVectorizer(tokenizer=LemmaTokenizer(),
@@ -150,9 +150,9 @@ def helloBack():
                 if content['type'] == 'expected_impacts':
                     trsfm_query = vectorizerImpact.transform([query]).toarray()
                     sims = cosine_similarity(trsfm_query, trsfm_Impact)
-            else:
-                trsfm_query = vectorizerText.transform([query]).toarray()
-                sims = cosine_similarity(trsfm_query, trsfm_Text)
+#            else:
+#                trsfm_query = vectorizerText.transform([query]).toarray()
+#                sims = cosine_similarity(trsfm_query, trsfm_Text)
             top100 = pd.DataFrame(numpy.sort(sims)[0][-100:],df['Title'][numpy.argsort(sims)[0][-100:]])              
             return top100.reset_index().to_json(orient='records')
         else:
