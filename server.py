@@ -70,40 +70,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 #print("Full text model created")
 
 ##Handle challenge part search model
-vectorizerChallenge = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-                                 strip_accents = 'unicode', # works 
-                                stop_words = 'english', # works
-                                lowercase = True, # works
-                                max_df = 0.05, # works
-                                min_df = 0.001)
-trsfm_Challenge=vectorizerChallenge.fit_transform(topics_challenge)
-print(len(vectorizerChallenge.get_feature_names()))
 
-print("Challenge model created")
-
-##Handle scope part search model
-vectorizerScope = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-                                 strip_accents = 'unicode', # works 
-                                stop_words = 'english', # works
-                                lowercase = True, # works
-                                max_df = 0.05, # works
-                                min_df = 0.001)
-trsfm_Scope=vectorizerScope.fit_transform(topics_scope)
-print(len(vectorizerScope.get_feature_names()))
-
-print("Scope model created")
-
-##Handle impact part search model
-vectorizerImpact = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-                                 strip_accents = 'unicode', # works 
-                                stop_words = 'english', # works
-                                lowercase = True, # works
-                                max_df = 0.05, # works
-                                min_df = 0.001)
-trsfm_Impact=vectorizerImpact.fit_transform(topics_impact)
-print(len(vectorizerImpact.get_feature_names()))
-
-print("Impact model created")
 
 #trsfmT_challenge = vectorizerText.transform(topics_challenge).toarray()
 
@@ -127,7 +94,7 @@ from flask import request
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
-def hello():
+def hello():    
     response = "Hello World!"
     return jsonify(response)
 
@@ -157,4 +124,40 @@ def helloBack():
             return top100.reset_index().to_json(orient='records')
         else:
             print("json not valid")
-            
+			
+			
+vectorizerChallenge = TfidfVectorizer(tokenizer=LemmaTokenizer(),
+                                 strip_accents = 'unicode', # works 
+                                stop_words = 'english', # works
+                                lowercase = True, # works
+                                max_df = 0.05, # works
+                                min_df = 0.001)
+trsfm_Challenge=vectorizerChallenge.fit_transform(topics_challenge)
+print(len(vectorizerChallenge.get_feature_names()))
+
+print("Challenge model created")
+
+##Handle scope part search model
+vectorizerScope = TfidfVectorizer(tokenizer=LemmaTokenizer(),
+								 strip_accents = 'unicode', # works 
+								stop_words = 'english', # works
+								lowercase = True, # works
+								max_df = 0.05, # works
+								min_df = 0.001)
+trsfm_Scope=vectorizerScope.fit_transform(topics_scope)
+print(len(vectorizerScope.get_feature_names()))
+
+print("Scope model created")
+
+##Handle impact part search model
+vectorizerImpact = TfidfVectorizer(tokenizer=LemmaTokenizer(),
+								 strip_accents = 'unicode', # works 
+								stop_words = 'english', # works
+								lowercase = True, # works
+								max_df = 0.05, # works
+								min_df = 0.001)
+trsfm_Impact=vectorizerImpact.fit_transform(topics_impact)
+print(len(vectorizerImpact.get_feature_names()))
+
+print("Impact model created")
+		
