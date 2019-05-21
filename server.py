@@ -1,6 +1,3 @@
-import nltk
-nltk.download('punkt')
-
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 import numpy as numpy
@@ -66,7 +63,6 @@ vectorizerText = TfidfVectorizer(tokenizer=LemmaTokenizer(),
                                 min_df = 0.001)
 trsfm_Text=vectorizerText.fit_transform(topics_text)
 print(len(vectorizerText.get_feature_names()))
-pd.DataFrame(trsfm_Text.toarray(),columns=vectorizerText.get_feature_names(),index=topics_text)
 
 print("Full text model created")
 
@@ -79,7 +75,6 @@ vectorizerChallenge = TfidfVectorizer(tokenizer=LemmaTokenizer(),
                                 min_df = 0.001)
 trsfm_Challenge=vectorizerChallenge.fit_transform(topics_challenge)
 print(len(vectorizerChallenge.get_feature_names()))
-pd.DataFrame(trsfm_Challenge.toarray(),columns=vectorizerChallenge.get_feature_names(),index=topics_challenge)
 
 print("Challenge model created")
 
@@ -92,7 +87,6 @@ vectorizerScope = TfidfVectorizer(tokenizer=LemmaTokenizer(),
                                 min_df = 0.001)
 trsfm_Scope=vectorizerScope.fit_transform(topics_scope)
 print(len(vectorizerScope.get_feature_names()))
-pd.DataFrame(trsfm_Scope.toarray(),columns=vectorizerScope.get_feature_names(),index=topics_scope)
 
 print("Scope model created")
 
@@ -105,21 +99,20 @@ vectorizerImpact = TfidfVectorizer(tokenizer=LemmaTokenizer(),
                                 min_df = 0.001)
 trsfm_Impact=vectorizerImpact.fit_transform(topics_impact)
 print(len(vectorizerImpact.get_feature_names()))
-pd.DataFrame(trsfm_Impact.toarray(),columns=vectorizerImpact.get_feature_names(),index=topics_impact)
 
 print("Impact model created")
 
-trsfmT_challenge = vectorizerText.transform(topics_challenge).toarray()
+#trsfmT_challenge = vectorizerText.transform(topics_challenge).toarray()
 
-print("Topic's Challenge vectorization done")
+#print("Topic's Challenge vectorization done")
 
-trsfmT_scope = vectorizerText.transform(topics_scope).toarray()
+#trsfmT_scope = vectorizerText.transform(topics_scope).toarray()
 
-print("Topic's Scope vectorization done")
+#print("Topic's Scope vectorization done")
 
-trsfmT_impact = vectorizerText.transform(topics_impact).toarray()
+#trsfmT_impact = vectorizerText.transform(topics_impact).toarray()
 
-print("Topic's Impact vectorization done")
+#print("Topic's Impact vectorization done")
 
 from sklearn.metrics.pairwise import cosine_similarity
 
