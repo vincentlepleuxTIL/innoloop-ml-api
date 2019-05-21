@@ -57,9 +57,48 @@ print("Impact cleaned")
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+
+vectorizerChallenge = TfidfVectorizer(tokenizer=LemmaTokenizer(),
+									 strip_accents = 'unicode', # works
+									stop_words = 'english', # works
+									lowercase = True, # works
+									max_df = 0.05, # works
+									min_df = 0.001)
+trsfm_Challenge = vectorizerChallenge.fit_transform(topics_challenge)
+print(len(vectorizerChallenge.get_feature_names()))
+
+print("Challenge model created")
+
+##Handle scope part search model
+#vectorizerScope = TfidfVectorizer(tokenizer=LemmaTokenizer(),
+#								 strip_accents = 'unicode', # works
+#								stop_words = 'english', # works
+#								lowercase = True, # works
+#								max_df = 0.05, # works
+#								min_df = 0.001)
+#trsfm_Scope = vectorizerScope.fit_transform(topics_scope)
+#print(len(vectorizerScope.get_feature_names()))
+
+#print("Scope model created")
+
+##Handle impact part search model
+#vectorizerImpact = TfidfVectorizer(tokenizer=LemmaTokenizer(),
+#								 strip_accents = 'unicode', # works
+#								stop_words = 'english', # works
+#								lowercase = True, # works
+#								max_df = 0.05, # works
+#								min_df = 0.001)
+#trsfm_Impact = vectorizerImpact.fit_transform(topics_impact)
+#print(len(vectorizerImpact.get_feature_names()))
+#print("Impact model created")
+
+
+
+
+
 ##Handle full text search model
 #vectorizerText = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-#                                 strip_accents = 'unicode', # works 
+#                                 strip_accents = 'unicode', # works
 #                                stop_words = 'english', # works
 #                                lowercase = True, # works
 #                               max_df = 0.05, # works
@@ -83,7 +122,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 #trsfmT_impact = vectorizerText.transform(topics_impact).toarray()
 
 #print("Topic's Impact vectorization done")
-
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -94,16 +132,16 @@ from flask import request
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
-def hello():    
-    response = "Hello World!"
-    return jsonify(response)
+def hello():	
+	response = "Hello World!"
+	return jsonify(response)
 
 @app.route("/", methods=['POST'])
 def helloBack():
     if request.is_json:
         content = request.get_json()
         if 'text' in content.keys():
-            query=content['text']
+            query = content['text']
             query = query.replace('\d+', '') # for digits
             query = query.replace(r'(\b\w{1,2}\b)', '') # for words
             query = query.replace('[^\w\s]', '')
@@ -124,40 +162,3 @@ def helloBack():
             return top100.reset_index().to_json(orient='records')
         else:
             print("json not valid")
-			
-			
-vectorizerChallenge = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-                                 strip_accents = 'unicode', # works 
-                                stop_words = 'english', # works
-                                lowercase = True, # works
-                                max_df = 0.05, # works
-                                min_df = 0.001)
-trsfm_Challenge=vectorizerChallenge.fit_transform(topics_challenge)
-print(len(vectorizerChallenge.get_feature_names()))
-
-print("Challenge model created")
-
-##Handle scope part search model
-vectorizerScope = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-								 strip_accents = 'unicode', # works 
-								stop_words = 'english', # works
-								lowercase = True, # works
-								max_df = 0.05, # works
-								min_df = 0.001)
-trsfm_Scope=vectorizerScope.fit_transform(topics_scope)
-print(len(vectorizerScope.get_feature_names()))
-
-print("Scope model created")
-
-##Handle impact part search model
-vectorizerImpact = TfidfVectorizer(tokenizer=LemmaTokenizer(),
-								 strip_accents = 'unicode', # works 
-								stop_words = 'english', # works
-								lowercase = True, # works
-								max_df = 0.05, # works
-								min_df = 0.001)
-trsfm_Impact=vectorizerImpact.fit_transform(topics_impact)
-print(len(vectorizerImpact.get_feature_names()))
-
-print("Impact model created")
-		
