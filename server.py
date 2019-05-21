@@ -1,4 +1,4 @@
-import ntlk
+import nltk
 nltk.download('punkt')
 
 from sklearn.feature_extraction.text import CountVectorizer
